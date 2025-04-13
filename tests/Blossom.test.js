@@ -28,14 +28,10 @@ describe("BlossomNFT and BlossomMarket", function () {
   });
 
   it("should list and buy an NFT", async function () {
-    // Alice mints NFT
     const tokenURI = "ipfs://exampleNFT";
     await nft.connect(alice).mint(tokenURI);
-
-    // Alice approves market to transfer NFT
     await nft.connect(alice).approve(market.address, 0);
 
-    // Alice lists NFT on marketplace
     const price = ethers.utils.parseEther("1");
     await market.connect(alice).listNFT(nft.address, 0, price);
 
@@ -43,7 +39,6 @@ describe("BlossomNFT and BlossomMarket", function () {
     expect(listings.length).to.equal(1);
     expect(listings[0].seller).to.equal(alice.address);
 
-    // Bob buys NFT
     await expect(() =>
       market.connect(bob).buyNFT(0, { value: price })
     ).to.changeEtherBalance(alice, price);
