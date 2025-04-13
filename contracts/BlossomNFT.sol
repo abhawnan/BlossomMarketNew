@@ -7,12 +7,12 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract BlossomNFT is ERC721URIStorage, Ownable {
     uint256 public nextTokenId;
 
-    constructor() ERC721("BlossomNFT", "BLOOM") {}
+    constructor() ERC721("BlossomNFT", "BLOOM") Ownable(msg.sender) {} 
 
     function mint(string memory tokenURI) public {
         uint256 tokenId = nextTokenId;
         _safeMint(msg.sender, tokenId);
-        _setTokenURI(tokenId, tokenURI); // URI should point to IPFS or metadata server
+        _setTokenURI(tokenId, tokenURI);
         nextTokenId++;
     }
 }
