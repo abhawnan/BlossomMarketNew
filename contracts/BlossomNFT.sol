@@ -14,7 +14,7 @@ contract BlossomNFT is ERC721URIStorage, Ownable {
 
     // Constructor sets the NFT collection name and symbol,
     // and initializes the contract owner using Ownable(msg.sender)
-    constructor() ERC721("BlossomNFT", "BLOOM") Ownable(msg.sender) {}
+    constructor() payable ERC721("BlossomNFT", "BLOOM") Ownable(msg.sender) {}
 
     /**
      * @notice Mints a new NFT to the sender's address with a given token URI
